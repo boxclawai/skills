@@ -2,12 +2,14 @@
 name: senior-java-developer
 version: "1.0.0"
 description: "Senior Java engineering expert: Spring Boot/Spring Framework, microservices architecture, JVM performance tuning, design patterns (GoF/Enterprise), testing (JUnit 5/Mockito/Testcontainers), build tools (Maven/Gradle), JPA/Hibernate, Spring Security, reactive programming (WebFlux), and modern Java (17–21+). Use when: (1) designing Spring Boot services, (2) writing clean, SOLID Java code, (3) optimizing JVM/GC performance, (4) building microservices with Spring Cloud, (5) writing comprehensive tests, (6) configuring Maven/Gradle builds, (7) implementing security with Spring Security, (8) troubleshooting concurrency or memory issues. NOT for: frontend UI, mobile apps, or non-JVM languages."
-tags: [java, spring-boot, microservices, jvm, maven, gradle, junit, hibernate, spring-security, design-patterns]
+tags: [java, spring-boot, microservices, jvm, maven, gradle, junit, hibernate, spring-security, design-patterns, webflux, opentelemetry, grpc, mapstruct]
 author: "boxclaw"
 references:
   - references/spring-boot-patterns.md
   - references/jvm-performance.md
   - references/testing-patterns.md
+  - references/reactive-observability.md
+  - references/advanced-java-patterns.md
 metadata:
   boxclaw:
     emoji: "☕"
@@ -482,6 +484,282 @@ public class OrderMetrics {
 }
 ```
 
+### 9. Reactive Programming (Spring WebFlux)
+
+Use WebFlux for non-blocking, high-throughput I/O-bound services:
+
+```java
+@RestController
+@RequestMapping("/api/v1/products")
+@RequiredArgsConstructor
+public class ProductController {
+
+    private final ProductService productService;
+
+    @GetMapping("/{id}")
+    public Mono<ProductResponse> getProduct(@PathVariable Long id) {
+        return productService.findById(id);
+    }
+
+    @GetMapping
+    public Flux<ProductResponse> streamProducts(
+            @RequestParam(defaultValue = "0") int page) {
+        return productService.findAll(page, 20);
+    }
+
+    @GetMapping(value = "/stream", produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<ProductResponse> streamRealtime() {
+        return productService.streamUpdates();
+    }
+}
+
+// Reactive service with WebClient
+@Service
+@RequiredArgsConstructor
+public class ProductService {
+
+    private final WebClient inventoryClient;
+    private final ReactiveRedisTemplate<String, Product> redisTemplate;
+
+    public Mono<ProductResponse> findById(Long id) {
+        return redisTemplate.opsForValue()
+                .get("product:" + id)                    // Check cache first
+                .switchIfEmpty(fetchAndCache(id))        // Cache miss → fetch
+                .map(ProductMapper::toResponse);
+    }
+
+    private Mono<Product> fetchAndCache(Long id) {
+        return inventoryClient.get()
+                .uri("/products/{id}", id)
+                .retrieve()
+                .bodyToMono(Product.class)
+                .flatMap(p -> redisTemplate.opsForValue()
+                        .set("product:" + p.getId(), p, Duration.ofMinutes(10))
+                        .thenReturn(p));
+    }
+}
+```
+
+**When to use WebFlux vs MVC:**
+- **WebFlux**: High-concurrency I/O (API gateways, aggregators, streaming, 10K+ concurrent connections)
+- **MVC + Virtual Threads**: Traditional CRUD, complex business logic, JDBC/JPA (blocking I/O)
+
+### 10. Structured Logging & Distributed Tracing
+
+```java
+// Structured JSON logging with Logback
+// logback-spring.xml
+@Slf4j
+@Component
+public class OrderProcessor {
+
+    public void process(Order order) {
+        // Use MDC for correlation
+        MDC.put("orderId", order.getId().toString());
+        MDC.put("customerId", order.getCustomerId().toString());
+
+        log.info("Processing order", kv("amount", order.getTotal()),
+                kv("items", order.getItems().size()));
+        try {
+            // ... processing logic
+            log.info("Order processed successfully");
+        } catch (Exception e) {
+            log.error("Order processing failed", kv("errorCode", "PROC_FAIL"), e);
+            throw e;
+        } finally {
+            MDC.clear();
+        }
+    }
+}
+```
+
+```xml
+<!-- logback-spring.xml — JSON output for production -->
+<configuration>
+  <springProfile name="prod">
+    <appender name="JSON" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder class="net.logstash.logback.encoder.LogstashEncoder">
+        <includeMdcKeyName>orderId</includeMdcKeyName>
+        <includeMdcKeyName>traceId</includeMdcKeyName>
+        <includeMdcKeyName>spanId</includeMdcKeyName>
+      </encoder>
+    </appender>
+    <root level="INFO"><appender-ref ref="JSON"/></root>
+  </springProfile>
+  <springProfile name="dev">
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+      <encoder><pattern>%d{HH:mm:ss} %-5level [%thread] %logger{36} - %msg%n</pattern></encoder>
+    </appender>
+    <root level="DEBUG"><appender-ref ref="CONSOLE"/></root>
+  </springProfile>
+</configuration>
+```
+
+OpenTelemetry auto-instrumentation:
+
+```yaml
+# application.yml
+management:
+  tracing:
+    sampling:
+      probability: 1.0  # 100% in dev, 0.1 (10%) in prod
+  otlp:
+    tracing:
+      endpoint: http://localhost:4318/v1/traces
+```
+
+### 11. API Documentation (OpenAPI / Springdoc)
+
+```java
+@Configuration
+public class OpenApiConfig {
+    @Bean
+    public OpenAPI customOpenAPI() {
+        return new OpenAPI()
+                .info(new Info()
+                        .title("Order Service API")
+                        .version("1.0.0")
+                        .description("Order management microservice"))
+                .addSecurityItem(new SecurityRequirement().addList("bearer"))
+                .components(new Components()
+                        .addSecuritySchemes("bearer",
+                                new SecurityScheme()
+                                        .type(SecurityScheme.Type.HTTP)
+                                        .scheme("bearer")
+                                        .bearerFormat("JWT")));
+    }
+}
+
+// Controller annotations
+@Operation(summary = "Create a new order")
+@ApiResponses({
+    @ApiResponse(responseCode = "201", description = "Order created"),
+    @ApiResponse(responseCode = "400", description = "Invalid request"),
+    @ApiResponse(responseCode = "409", description = "Duplicate order")
+})
+@PostMapping
+public ResponseEntity<OrderResponse> createOrder(
+        @RequestBody @Valid CreateOrderRequest request) { }
+```
+
+```yaml
+# pom.xml dependency
+# org.springdoc:springdoc-openapi-starter-webmvc-ui:2.x
+# Swagger UI at: http://localhost:8080/swagger-ui.html
+# OpenAPI JSON at: http://localhost:8080/v3/api-docs
+```
+
+### 12. MapStruct for DTO Mapping
+
+```java
+@Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.ERROR)
+public interface OrderMapper {
+
+    @Mapping(target = "customerName", source = "customer.name")
+    @Mapping(target = "total", expression = "java(order.getTotal())")
+    OrderResponse toResponse(Order order);
+
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "createdAt", ignore = true)
+    Order toEntity(CreateOrderRequest request);
+
+    List<OrderResponse> toResponseList(List<Order> orders);
+
+    // Update existing entity (partial update)
+    @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    void updateEntity(UpdateOrderRequest request, @MappingTarget Order order);
+}
+```
+
+### 13. Lombok Best Practices
+
+```java
+// DO: Use @Getter @Setter on entities (not @Data — breaks equals/hashCode)
+@Entity
+@Getter @Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)  // JPA requires no-arg
+@ToString(exclude = {"items", "customer"})           // Avoid lazy-load triggers
+public class Order { }
+
+// DO: Use @Builder for complex construction
+@Builder
+@Getter
+public class ReportCriteria {
+    private final Instant from;
+    private final Instant to;
+    @Builder.Default
+    private final int limit = 100;
+}
+
+// DON'T: @Data on JPA entities (generates equals/hashCode using all fields)
+// DON'T: @ToString on entities with lazy associations (triggers N+1)
+// DON'T: @AllArgsConstructor on entities (bypasses validation)
+
+// DO: Use records for DTOs instead of Lombok (Java 17+)
+public record CreateOrderRequest(
+        @NotNull Long customerId,
+        @NotEmpty List<OrderItemRequest> items
+) {}  // No Lombok needed — records are better for DTOs
+```
+
+### 14. Graceful Shutdown & Health Checks
+
+```yaml
+# application.yml
+server:
+  shutdown: graceful
+spring:
+  lifecycle:
+    timeout-per-shutdown-phase: 30s
+
+management:
+  endpoint:
+    health:
+      show-details: when-authorized
+      probes:
+        enabled: true  # Exposes /actuator/health/liveness + /readiness
+  health:
+    diskspace:
+      enabled: true
+    db:
+      enabled: true
+    redis:
+      enabled: true
+```
+
+```java
+// Custom health indicator
+@Component
+public class PaymentGatewayHealthIndicator implements HealthIndicator {
+
+    private final PaymentGatewayClient client;
+
+    @Override
+    public Health health() {
+        try {
+            boolean reachable = client.ping();
+            return reachable
+                    ? Health.up().withDetail("gateway", "reachable").build()
+                    : Health.down().withDetail("gateway", "unreachable").build();
+        } catch (Exception e) {
+            return Health.down(e).build();
+        }
+    }
+}
+
+// Graceful shutdown hook for cleanup
+@Component
+@Slf4j
+public class ShutdownHook implements DisposableBean {
+    @Override
+    public void destroy() {
+        log.info("Draining in-flight requests...");
+        // Close connections, flush buffers, etc.
+    }
+}
+```
+
 ## Quick Commands
 
 ```bash
@@ -528,3 +806,5 @@ mvn flyway:repair
 - **Spring Boot patterns**: See [references/spring-boot-patterns.md](references/spring-boot-patterns.md)
 - **JVM performance**: See [references/jvm-performance.md](references/jvm-performance.md)
 - **Testing patterns**: See [references/testing-patterns.md](references/testing-patterns.md)
+- **Reactive & Observability**: See [references/reactive-observability.md](references/reactive-observability.md)
+- **Advanced patterns**: See [references/advanced-java-patterns.md](references/advanced-java-patterns.md)

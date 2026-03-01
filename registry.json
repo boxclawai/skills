@@ -137,10 +137,10 @@
       "version": "1.0.0",
       "emoji": "☕",
       "role": "Senior Java Developer",
-      "description": "Spring Boot, microservices, JVM performance tuning, JPA/Hibernate, Spring Security, testing (JUnit 5/Mockito/Testcontainers), Maven/Gradle, design patterns.",
-      "tags": ["java", "spring-boot", "microservices", "jvm", "maven", "gradle", "junit", "hibernate", "spring-security", "design-patterns"],
-      "refs": 3,
-      "scripts": 2
+      "description": "Spring Boot, microservices, JVM tuning, JPA/Hibernate, Spring Security, WebFlux, gRPC, OpenTelemetry, MapStruct, Spring Batch, testing (JUnit 5/Mockito/Testcontainers).",
+      "tags": ["java", "spring-boot", "microservices", "jvm", "maven", "gradle", "junit", "hibernate", "spring-security", "design-patterns", "webflux", "grpc", "opentelemetry", "mapstruct"],
+      "refs": 5,
+      "scripts": 3
     }
   }
 }
