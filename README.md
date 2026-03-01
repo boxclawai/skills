@@ -4,6 +4,7 @@
 </p>
 
 <p align="center">
+  <a href="https://www.npmjs.com/package/boxclaw"><img src="https://img.shields.io/npm/v/boxclaw?style=flat-square&color=red" alt="npm" /></a>
   <img src="https://img.shields.io/badge/Skills-13-blue?style=flat-square" alt="Skills: 13" />
   <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License: MIT" />
   <img src="https://img.shields.io/badge/Platform-Multi--Agent-purple?style=flat-square" alt="Platform: Multi-Agent" />
@@ -54,14 +55,45 @@ With skill:     "Here's a production route with Zod validation, cursor paginatio
 
 ## Quick Start
 
-### 1. Clone the repository
+### Install with BoxClaw CLI (Recommended)
 
 ```bash
-git clone https://github.com/boxclaw/boxclaw-skills.git
-cd boxclaw-skills
+npm install -g boxclaw
+boxclaw init
+boxclaw install skill frontend-developer
+boxclaw install skill devops-engineer
 ```
 
-### 2. Copy skills to your project
+That's it. Skills are downloaded to `.skills/` and your agent is auto-configured.
+
+```bash
+# See all available skills, MCP servers, and RAG templates
+boxclaw list
+
+# Search by keyword
+boxclaw search react
+
+# Update installed skills
+boxclaw update
+
+# Install MCP servers and RAG templates too
+boxclaw install mcp github
+boxclaw install rag codebase-rag
+```
+
+### Manual Install
+
+<details>
+<summary>Click to expand manual install instructions</summary>
+
+#### 1. Clone the repository
+
+```bash
+git clone https://github.com/boxclawai/skills.git
+cd skills
+```
+
+#### 2. Copy skills to your project
 
 ```bash
 # Copy a single skill
@@ -74,9 +106,11 @@ cp -r . /path/to/your/project/.skills/boxclaw-skills/
 ln -s "$(pwd)/frontend-developer" /path/to/your/project/.skills/frontend-developer
 ```
 
-### 3. Configure your agent
+#### 3. Configure your agent
 
 See [Agent Setup](#agent-setup) below for quick snippets, or [SETUP.md](SETUP.md) for detailed step-by-step guides.
+
+</details>
 
 ---
 
@@ -424,7 +458,7 @@ Absolutely. Each reference document is self-contained. You can use `postgresql-t
 BoxClaw Skills are structured expertise modules, not simple prompts. Each skill includes: decision frameworks (when to use what), production patterns (not toy examples), reference documents (deep knowledge), and automation scripts (executable tools).
 
 **How do I keep skills updated?**
-If you cloned the repo, run `git pull`. If you copied files, re-copy from the latest release. Symlinks or git submodules make updates easier -- see [SETUP.md](SETUP.md#installation).
+With BoxClaw CLI: `boxclaw update` updates all installed skills. Manual install: `git pull` if you cloned, or re-copy from the latest release.
 
 ---
 
