@@ -1,0 +1,136 @@
+{
+  "version": "1.0.0",
+  "repo": "https://github.com/boxclawai/skills",
+  "skills": {
+    "frontend-developer": {
+      "name": "frontend-developer",
+      "version": "1.0.0",
+      "emoji": "🎨",
+      "role": "Frontend Developer",
+      "description": "React, Vue, Angular, Svelte, CSS/Tailwind, responsive design, accessibility, performance optimization, component architecture.",
+      "tags": ["react", "vue", "angular", "svelte", "css", "tailwind", "accessibility", "performance", "components", "responsive"],
+      "refs": 2,
+      "scripts": 2
+    },
+    "backend-developer": {
+      "name": "backend-developer",
+      "version": "1.0.0",
+      "emoji": "🔧",
+      "role": "Backend Developer",
+      "description": "API design (REST/GraphQL/gRPC), database integration, authentication (JWT/OAuth/RBAC), caching, message queues, microservices.",
+      "tags": ["api", "rest", "graphql", "grpc", "nodejs", "python", "go", "authentication", "database", "redis", "microservices"],
+      "refs": 2,
+      "scripts": 2
+    },
+    "fullstack-developer": {
+      "name": "fullstack-developer",
+      "version": "1.0.0",
+      "emoji": "🔮",
+      "role": "Full-Stack Developer",
+      "description": "End-to-end app building with Next.js/Nuxt, database design, API integration, authentication, deployment, rapid prototyping.",
+      "tags": ["nextjs", "nuxt", "react", "vue", "prisma", "drizzle", "monorepo", "deployment", "authentication", "fullstack"],
+      "refs": 2,
+      "scripts": 1
+    },
+    "devops-engineer": {
+      "name": "devops-engineer",
+      "version": "1.0.0",
+      "emoji": "🚀",
+      "role": "DevOps Engineer",
+      "description": "CI/CD pipelines, Docker, Kubernetes, Terraform, monitoring (Prometheus/Grafana), logging, cloud platforms.",
+      "tags": ["cicd", "docker", "kubernetes", "terraform", "prometheus", "grafana", "github-actions", "monitoring", "infrastructure"],
+      "refs": 3,
+      "scripts": 2
+    },
+    "mobile-developer": {
+      "name": "mobile-developer",
+      "version": "1.0.0",
+      "emoji": "📱",
+      "role": "Mobile Developer",
+      "description": "React Native, Flutter, Swift/SwiftUI, Kotlin/Jetpack Compose, cross-platform architecture, offline-first, push notifications.",
+      "tags": ["react-native", "flutter", "swift", "kotlin", "ios", "android", "expo", "mobile", "cross-platform", "offline-first"],
+      "refs": 2,
+      "scripts": 1
+    },
+    "qa-test-engineer": {
+      "name": "qa-test-engineer",
+      "version": "1.0.0",
+      "emoji": "🧪",
+      "role": "QA Test Engineer",
+      "description": "TDD/BDD, unit testing (Jest/Vitest), E2E testing (Playwright/Cypress), load testing (k6), test automation, CI pipelines.",
+      "tags": ["testing", "vitest", "jest", "playwright", "cypress", "k6", "tdd", "bdd", "e2e", "coverage", "load-testing"],
+      "refs": 2,
+      "scripts": 1
+    },
+    "data-engineer": {
+      "name": "data-engineer",
+      "version": "1.0.0",
+      "emoji": "🔄",
+      "role": "Data Engineer",
+      "description": "ETL/ELT pipelines (Airflow/dbt), data warehousing (Snowflake/BigQuery), stream processing (Kafka), data quality.",
+      "tags": ["etl", "elt", "dbt", "airflow", "spark", "kafka", "data-warehouse", "snowflake", "bigquery", "data-quality"],
+      "refs": 2,
+      "scripts": 1
+    },
+    "security-engineer": {
+      "name": "security-engineer",
+      "version": "1.0.0",
+      "emoji": "🛡️",
+      "role": "Security Engineer",
+      "description": "OWASP Top 10, secure code review, authentication hardening, cryptography, dependency scanning, secrets management, threat modeling.",
+      "tags": ["owasp", "security", "authentication", "encryption", "xss", "sql-injection", "secrets", "vulnerability", "threat-modeling"],
+      "refs": 2,
+      "scripts": 1
+    },
+    "system-architect": {
+      "name": "system-architect",
+      "version": "1.0.0",
+      "emoji": "🏗️",
+      "role": "System Architect",
+      "description": "System design, scalability patterns, distributed systems, DDD/CQRS/Event Sourcing, ADR, capacity planning.",
+      "tags": ["architecture", "system-design", "ddd", "cqrs", "event-sourcing", "microservices", "scalability", "distributed-systems", "adr"],
+      "refs": 2,
+      "scripts": 1
+    },
+    "tech-lead": {
+      "name": "tech-lead",
+      "version": "1.0.0",
+      "emoji": "👔",
+      "role": "Tech Lead",
+      "description": "Code review, PR management, sprint planning, tech debt management, incident response, engineering metrics, mentoring.",
+      "tags": ["code-review", "sprint-planning", "tech-debt", "dora-metrics", "incident-response", "mentoring", "standards"],
+      "refs": 2,
+      "scripts": 1
+    },
+    "ai-ml-engineer": {
+      "name": "ai-ml-engineer",
+      "version": "1.0.0",
+      "emoji": "🤖",
+      "role": "AI/ML Engineer",
+      "description": "ML pipelines, model training (PyTorch/TensorFlow), MLOps, LLM integration, RAG systems, vector databases, prompt engineering.",
+      "tags": ["machine-learning", "llm", "rag", "pytorch", "tensorflow", "mlops", "mlflow", "prompt-engineering", "vector-db", "embeddings"],
+      "refs": 2,
+      "scripts": 1
+    },
+    "database-administrator": {
+      "name": "database-administrator",
+      "version": "1.0.0",
+      "emoji": "🗄️",
+      "role": "Database Administrator",
+      "description": "PostgreSQL, MySQL, MongoDB, Redis, query optimization, index design, replication, backup/recovery, connection pooling.",
+      "tags": ["postgresql", "mysql", "mongodb", "redis", "query-optimization", "indexing", "replication", "backup", "migration", "monitoring"],
+      "refs": 2,
+      "scripts": 1
+    },
+    "cloud-architect": {
+      "name": "cloud-architect",
+      "version": "1.0.0",
+      "emoji": "☁️",
+      "role": "Cloud Architect",
+      "description": "AWS/GCP/Azure, serverless (Lambda), Infrastructure as Code (Terraform/CDK), networking, cost optimization, disaster recovery.",
+      "tags": ["aws", "gcp", "azure", "terraform", "serverless", "lambda", "vpc", "cost-optimization", "disaster-recovery", "iac"],
+      "refs": 2,
+      "scripts": 1
+    }
+  }
+}
