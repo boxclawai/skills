@@ -141,6 +141,16 @@
       "tags": ["java", "spring-boot", "microservices", "jvm", "maven", "gradle", "junit", "hibernate", "spring-security", "design-patterns", "webflux", "grpc", "opentelemetry", "mapstruct"],
       "refs": 5,
       "scripts": 3
+    },
+    "code-reviewer": {
+      "name": "code-reviewer",
+      "version": "1.0.0",
+      "emoji": "🔍",
+      "role": "Code Reviewer",
+      "description": "Code review frameworks, SonarQube/SonarCloud, static analysis (PMD/SpotBugs/ESLint/Ruff), code smells, refactoring patterns, quality gates, PR workflows.",
+      "tags": ["code-review", "sonarqube", "static-analysis", "pmd", "spotbugs", "eslint", "ruff", "code-quality", "refactoring", "clean-code", "quality-gates"],
+      "refs": 2,
+      "scripts": 2
     }
   }
 }

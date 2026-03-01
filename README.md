@@ -5,7 +5,7 @@
 
 <p align="center">
   <a href="https://www.npmjs.com/package/boxclaw"><img src="https://img.shields.io/npm/v/boxclaw?style=flat-square&color=red" alt="npm" /></a>
-  <img src="https://img.shields.io/badge/Skills-14-blue?style=flat-square" alt="Skills: 14" />
+  <img src="https://img.shields.io/badge/Skills-15-blue?style=flat-square" alt="Skills: 15" />
   <img src="https://img.shields.io/badge/License-MIT-green?style=flat-square" alt="License: MIT" />
   <img src="https://img.shields.io/badge/Platform-Multi--Agent-purple?style=flat-square" alt="Platform: Multi-Agent" />
   <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen?style=flat-square" alt="PRs Welcome" />
@@ -15,11 +15,11 @@
 
 ## What is BoxClaw Skills?
 
-BoxClaw Skills is a curated collection of **14 expert-level skill modules** that transform any AI coding agent into a domain specialist.
+BoxClaw Skills is a curated collection of **15 expert-level skill modules** that transform any AI coding agent into a domain specialist.
 
 - **Instant expertise** -- Each skill contains battle-tested patterns, checklists, and workflows distilled from production experience. Your agent goes from generic to specialist in seconds.
-- **Deep reference library** -- 32 reference documents with 35,000+ lines of detailed patterns, templates, and real-world examples that agents can load on demand.
-- **Automation scripts** -- 19 ready-to-run scripts for scaffolding, auditing, building, and deploying -- agents can execute them directly.
+- **Deep reference library** -- 34 reference documents with 36,500+ lines of detailed patterns, templates, and real-world examples that agents can load on demand.
+- **Automation scripts** -- 21 ready-to-run scripts for scaffolding, auditing, building, and deploying -- agents can execute them directly.
 - **Works everywhere** -- Compatible with Claude Code, Cursor, Windsurf, Cline, Antigravity, OpenClaw, and any agent that supports custom instructions.
 
 ### Before vs After
@@ -51,6 +51,7 @@ With skill:     "Here's a production route with Zod validation, cursor paginatio
 | :file_cabinet: | [database-administrator](database-administrator/) | Database Administrator | Query optimization, indexing, replication, backup/recovery | 2 | 1 |
 | :cloud: | [cloud-architect](cloud-architect/) | Cloud Architect | AWS/GCP/Azure, serverless, IaC, cost optimization, HA/DR | 2 | 1 |
 | :coffee: | [senior-java-developer](senior-java-developer/) | Senior Java Developer | Spring Boot, WebFlux, gRPC, JVM tuning, OpenTelemetry, MapStruct | 5 | 3 |
+| :mag: | [code-reviewer](code-reviewer/) | Code Reviewer | SonarQube, static analysis, code smells, refactoring, quality gates | 2 | 2 |
 
 ---
 
@@ -317,6 +318,8 @@ Automation scripts that agents can execute directly:
 | `model-eval.py` | ai-ml | ML model evaluation with metrics and reports |
 | `pg-health-check.sh` | dba | PostgreSQL health metrics and diagnostics |
 | `cost-report.sh` | cloud | AWS cost analysis and waste detection |
+| `sonarqube-setup.sh` | code-reviewer | SonarQube/SonarCloud setup (Docker, cloud, CI pipelines) |
+| `code-quality-check.sh` | code-reviewer | Multi-language quality checks (lint, format, security) |
 
 All shell scripts are cross-platform compatible (macOS + Linux) and use `set -euo pipefail`.
 
@@ -472,7 +475,7 @@ Contributions are welcome! Here's how you can help:
 
 ## FAQ
 
-**Do I need all 13 skills?**
+**Do I need all 15 skills?**
 No. Copy only the skills relevant to your project. A React app might only need `frontend-developer` and `qa-test-engineer`.
 
 **Can I use multiple skills at once?**
