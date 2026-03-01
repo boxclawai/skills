@@ -34,7 +34,6 @@ from config import (
     CHUNK_MODE,
     CHUNK_SIZE,
     CHUNK_OVERLAP,
-    TOP_K,
 )
 
 
@@ -114,13 +113,16 @@ def chunk_by_paragraph(
             pos = full_text.find(chunk_text)
         chunk_end = pos + len(chunk_text) if pos >= 0 else len(full_text)
 
-        # Determine page range
-        page_start = pages[0]["page_num"] if pages else 1
-        page_end = page_start
+        # Determine page range for this chunk
+        page_start = float('inf')
+        page_end = 0
         for seg_start, seg_end, page_num in offset_to_page:
             if pos < seg_end and chunk_end > seg_start:
-                page_start = min(page_start, page_num) if chunks else page_num
+                page_start = min(page_start, page_num)
                 page_end = max(page_end, page_num)
+        if page_start == float('inf'):
+            page_start = pages[0]["page_num"] if pages else 1
+            page_end = page_start
 
         if pos >= 0:
             search_start = pos + 1
