@@ -1,0 +1,49 @@
+{
+  "version": "1.0.0",
+  "templates": {
+    "codebase-rag": {
+      "name": "codebase-rag",
+      "emoji": "💻",
+      "description": "RAG pipeline for querying your codebase with natural language",
+      "tags": ["codebase", "code-search", "embeddings", "chromadb"],
+      "version": "1.0.0",
+      "stack": ["Python", "ChromaDB", "OpenAI Embeddings"],
+      "setup": [
+        "cd .rag/codebase-rag && pip install -r requirements.txt",
+        "Set OPENAI_API_KEY in .env",
+        "Run: python index.py to index your codebase",
+        "Run: python query.py 'your question' to search"
+      ]
+    },
+    "docs-rag": {
+      "name": "docs-rag",
+      "emoji": "📖",
+      "description": "RAG pipeline for querying documentation and markdown files",
+      "tags": ["docs", "documentation", "markdown", "knowledge-base"],
+      "version": "1.0.0",
+      "stack": ["Python", "FAISS", "LangChain"],
+      "setup": [
+        "cd .rag/docs-rag && pip install -r requirements.txt",
+        "Set OPENAI_API_KEY in .env",
+        "Place your docs in .rag/docs-rag/documents/",
+        "Run: python index.py to build the index",
+        "Run: python query.py 'your question' to search"
+      ]
+    },
+    "pdf-rag": {
+      "name": "pdf-rag",
+      "emoji": "📄",
+      "description": "RAG pipeline for extracting and querying PDF documents",
+      "tags": ["pdf", "documents", "extraction", "search"],
+      "version": "1.0.0",
+      "stack": ["Python", "PyPDF2", "ChromaDB", "LangChain"],
+      "setup": [
+        "cd .rag/pdf-rag && pip install -r requirements.txt",
+        "Set OPENAI_API_KEY in .env",
+        "Place your PDFs in .rag/pdf-rag/pdfs/",
+        "Run: python index.py to process and index PDFs",
+        "Run: python query.py 'your question' to search"
+      ]
+    }
+  }
+}

@@ -1,0 +1,121 @@
+{
+  "version": "1.0.0",
+  "servers": {
+    "filesystem": {
+      "name": "filesystem",
+      "emoji": "📁",
+      "description": "Read, write, and manage local files and directories",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "{PROJECT_DIR}"],
+      "env": {},
+      "package": "@modelcontextprotocol/server-filesystem",
+      "tags": ["files", "filesystem", "local", "read", "write"],
+      "version": "1.0.0"
+    },
+    "github": {
+      "name": "github",
+      "emoji": "🐙",
+      "description": "Access GitHub repos, issues, PRs, and actions",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": {
+        "GITHUB_PERSONAL_ACCESS_TOKEN": "<your-token>"
+      },
+      "package": "@modelcontextprotocol/server-github",
+      "tags": ["github", "git", "issues", "pull-requests", "repos"],
+      "version": "1.0.0"
+    },
+    "postgres": {
+      "name": "postgres",
+      "emoji": "🐘",
+      "description": "Query and manage PostgreSQL databases",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-postgres", "postgresql://localhost:5432/mydb"],
+      "env": {},
+      "package": "@modelcontextprotocol/server-postgres",
+      "tags": ["postgres", "postgresql", "database", "sql"],
+      "version": "1.0.0"
+    },
+    "sqlite": {
+      "name": "sqlite",
+      "emoji": "📦",
+      "description": "Query and manage SQLite databases",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite", "database.db"],
+      "env": {},
+      "package": "@modelcontextprotocol/server-sqlite",
+      "tags": ["sqlite", "database", "sql", "local"],
+      "version": "1.0.0"
+    },
+    "memory": {
+      "name": "memory",
+      "emoji": "🧠",
+      "description": "Persistent memory with knowledge graph for long-term context",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-memory"],
+      "env": {},
+      "package": "@modelcontextprotocol/server-memory",
+      "tags": ["memory", "knowledge-graph", "context", "persistent"],
+      "version": "1.0.0"
+    },
+    "fetch": {
+      "name": "fetch",
+      "emoji": "🌐",
+      "description": "Fetch and extract content from web URLs",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-fetch"],
+      "env": {},
+      "package": "@modelcontextprotocol/server-fetch",
+      "tags": ["web", "fetch", "http", "url", "scrape"],
+      "version": "1.0.0"
+    },
+    "puppeteer": {
+      "name": "puppeteer",
+      "emoji": "🎭",
+      "description": "Browser automation and web scraping with Puppeteer",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-puppeteer"],
+      "env": {},
+      "package": "@modelcontextprotocol/server-puppeteer",
+      "tags": ["browser", "puppeteer", "automation", "scraping", "testing"],
+      "version": "1.0.0"
+    },
+    "brave-search": {
+      "name": "brave-search",
+      "emoji": "🔍",
+      "description": "Web search using Brave Search API",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-brave-search"],
+      "env": {
+        "BRAVE_API_KEY": "<your-api-key>"
+      },
+      "package": "@modelcontextprotocol/server-brave-search",
+      "tags": ["search", "web", "brave", "internet"],
+      "version": "1.0.0"
+    },
+    "slack": {
+      "name": "slack",
+      "emoji": "💬",
+      "description": "Read and send Slack messages, manage channels",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-slack"],
+      "env": {
+        "SLACK_BOT_TOKEN": "<your-bot-token>"
+      },
+      "package": "@modelcontextprotocol/server-slack",
+      "tags": ["slack", "messaging", "chat", "team"],
+      "version": "1.0.0"
+    },
+    "sequential-thinking": {
+      "name": "sequential-thinking",
+      "emoji": "💭",
+      "description": "Dynamic problem-solving through structured sequential thinking",
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"],
+      "env": {},
+      "package": "@modelcontextprotocol/server-sequential-thinking",
+      "tags": ["thinking", "reasoning", "problem-solving", "chain-of-thought"],
+      "version": "1.0.0"
+    }
+  }
+}
