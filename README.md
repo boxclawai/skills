@@ -20,7 +20,7 @@ BoxClaw Skills is a curated collection of **13 expert-level skill modules** that
 - **Instant expertise** -- Each skill contains battle-tested patterns, checklists, and workflows distilled from production experience. Your agent goes from generic to specialist in seconds.
 - **Deep reference library** -- 27 reference documents with 30,000+ lines of detailed patterns, templates, and real-world examples that agents can load on demand.
 - **Automation scripts** -- 16 ready-to-run scripts for scaffolding, auditing, building, and deploying -- agents can execute them directly.
-- **Works everywhere** -- Compatible with Claude Code, Cursor, Windsurf, Cline, and any agent that supports custom instructions.
+- **Works everywhere** -- Compatible with Claude Code, Cursor, Windsurf, Cline, Antigravity, OpenClaw, and any agent that supports custom instructions.
 
 ### Before vs After
 
@@ -170,6 +170,41 @@ You are a senior frontend developer. Follow these expert patterns:
 
 [Paste the content of frontend-developer/SKILL.md here]
 ```
+
+### Antigravity
+
+BoxClaw Skills work with Google Antigravity's rules system. Create `.antigravityrules` in your project root:
+
+```
+You are a senior developer. Follow the expert patterns from BoxClaw Skills.
+
+Installed skills:
+- .skills/frontend-developer/SKILL.md
+
+Read the relevant SKILL.md based on the current task and follow its patterns.
+Reference documents: .skills/<skill>/references/
+Automation scripts: .skills/<skill>/scripts/
+```
+
+Or use Antigravity's built-in Skills system by pointing to `.skills/` — each skill's `SKILL.md` is auto-detected.
+
+### OpenClaw
+
+BoxClaw Skills are **natively compatible** with OpenClaw. The skill format (SKILL.md + YAML frontmatter + scripts/ + references/) matches OpenClaw's skill specification.
+
+Add `.skills/` to OpenClaw's skill search path in `~/.openclaw/openclaw.json`:
+
+```json
+{
+  "skills": {
+    "load": {
+      "extraDirs": ["/path/to/your/project/.skills"]
+    }
+  }
+}
+```
+
+OpenClaw will auto-detect all installed BoxClaw skills and make them available as agent capabilities.
 
 ### Generic / Other Agents
 
