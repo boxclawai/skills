@@ -131,6 +131,16 @@
       "tags": ["aws", "gcp", "azure", "terraform", "serverless", "lambda", "vpc", "cost-optimization", "disaster-recovery", "iac"],
       "refs": 2,
       "scripts": 1
+    },
+    "senior-java-developer": {
+      "name": "senior-java-developer",
+      "version": "1.0.0",
+      "emoji": "☕",
+      "role": "Senior Java Developer",
+      "description": "Spring Boot, microservices, JVM performance tuning, JPA/Hibernate, Spring Security, testing (JUnit 5/Mockito/Testcontainers), Maven/Gradle, design patterns.",
+      "tags": ["java", "spring-boot", "microservices", "jvm", "maven", "gradle", "junit", "hibernate", "spring-security", "design-patterns"],
+      "refs": 3,
+      "scripts": 2
     }
   }
 }
